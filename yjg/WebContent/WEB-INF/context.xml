@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Context>
+    <!-- Default set of monitored resources. If one of these changes, the    -->
+    <!-- web application will be reloaded.                                   -->
+    <WatchedResource>WEB-INF/web.xml</WatchedResource>
+    <WatchedResource>WEB-INF/tomcat-web.xml</WatchedResource>
+    <WatchedResource>${catalina.base}/conf/web.xml</WatchedResource>
+    <!-- Uncomment this to disable session persistence across Tomcat restarts -->
+    <!--
+    <Manager pathname="" />
+    -->
+ 	<!-- dbcp(DataBase Connection Pool) 설정 -->
+	<Resource name="oraDB" auth="Container"
+		driverClassName="oracle.jdbc.driver.OracleDriver" 
+		maxTotal="50"
+		maxIdle="10" 
+		maxWaitMillis="-1" 
+		type="javax.sql.DataSource"
+		url="jdbc:oracle:thin:@localhost:1521:xe" 
+		username="java" 
+		password="java1234" />
+</Context>

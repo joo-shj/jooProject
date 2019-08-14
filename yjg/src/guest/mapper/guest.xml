@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?> 
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="guest">
+	<select id="gbList" 
+		resultType="guest.GuestDTO">
+		select idx,email,passwd,content,post_date
+		from jg_guest
+		order by idx desc
+	</select>
+	<select id="gbListAll" resultType="guest.GuestDTO">
+	    select idx,email,passwd,content,post_date
+		from jg_guest
+		where email like #{search} or content like #{search}
+		order by idx desc
+	</select>
+	<insert id="gbInsert">
+	    insert into jg_guest (idx, email, passwd, content) 
+	    values (jg_guest_seq.nextval, 
+	    #{email}, #{passwd}, #{content})
+	</insert>
+	<select id="passwdCheck" resultType="int">
+	    select count(*) from jg_guest 
+	    where idx=#{idx} and passwd=#{passwd}
+	</select>
+	<select id="gbDetail" parameterType="int" 
+	resultType="guest.GuestDTO">
+	    select * from jg_guest where idx=#{idx}
+	</select>
+	<update id="gbUpdate" parameterType="guest.GuestDTO">
+	    update jg_guest set 
+	    email=#{email}, passwd=#{passwd}, 
+	    content = #{content}
+        where idx=#{idx} 
+	</update>
+	<delete id="gbDelete" parameterType="int">
+	    delete from jg_guest where idx=#{idx}
+	</delete>
+</mapper>
+
+
